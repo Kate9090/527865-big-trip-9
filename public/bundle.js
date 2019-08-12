@@ -322,7 +322,7 @@ const makeFilterTemplate = () => (
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "makeInfoTemplate", function() { return makeInfoTemplate; });
 const makeInfoTemplate = () => (
-  ``
+  `<h1 class="trip-info__title">Amsterdam &mdash; ... &mdash; Amsterdam</h1>`
 );
 
 
@@ -375,14 +375,15 @@ const renderComponent = (parent, child) => {
   parent.insertAdjacentHTML(`beforeend`, child);
 };
 
-const mainContainer = document.querySelector(`.page-body"`);
+const mainContainer = document.querySelector(`.page-body`);
+const infoContainer = mainContainer.querySelector(`.trip-info__main`);
 const menuContainer = mainContainer.querySelector(`.trip-main__trip-controls`);
 const filterContainer = mainContainer.querySelector(`.trip-events__trip-sort`);
-const cardEditContainer = mainContainer.querySelector(`.board__tasks-filter`);
-const cardTasksContainer = mainContainer.querySelector(`.trip-days"`);
+const cardEditContainer = mainContainer.querySelector(`.trip-events__item`);
+const cardTasksContainer = mainContainer.querySelector(`.trip-days`);
 
 const renderMockComponents = () => {
-
+  renderComponent(infoContainer, Object(_src_components_info__WEBPACK_IMPORTED_MODULE_4__["makeInfoTemplate"])());
   renderComponent(menuContainer, Object(_src_components_menu__WEBPACK_IMPORTED_MODULE_3__["makeMenuTemplate"])());
   renderComponent(filterContainer, Object(_src_components_filter__WEBPACK_IMPORTED_MODULE_2__["makeFilterTemplate"])());
   renderComponent(cardEditContainer, Object(_src_components_card_edit__WEBPACK_IMPORTED_MODULE_0__["makeCardEditTemplate"])());
