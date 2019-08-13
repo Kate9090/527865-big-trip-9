@@ -6,8 +6,8 @@ import {makeInfoTemplate} from '../src/components/info';
 
 const CARDS_COUNT = 3;
 
-const renderComponent = (parent, child) => {
-  parent.insertAdjacentHTML(`beforeend`, child);
+const renderComponent = (parent, child, place) => {
+  parent.insertAdjacentHTML(place, child);
 };
 
 const mainContainer = document.querySelector(`.page-body`);
@@ -18,13 +18,13 @@ const cardEditContainer = mainContainer.querySelector(`.trip-events__item`);
 const cardTasksContainer = mainContainer.querySelector(`.trip-days`);
 
 const renderMockComponents = () => {
-  renderComponent(infoContainer, makeInfoTemplate());
-  renderComponent(menuContainer, makeMenuTemplate());
-  renderComponent(filterContainer, makeFilterTemplate());
-  renderComponent(cardEditContainer, makeCardEditTemplate());
+  renderComponent(infoContainer, makeInfoTemplate(), `beforeend`);
+  renderComponent(menuContainer, makeMenuTemplate(),`beforeend`);
+  renderComponent(filterContainer, makeFilterTemplate(),`beforeend`);
+  renderComponent(cardEditContainer, makeCardEditTemplate(),`beforeend`);
 
   for (let i = 1; i <= CARDS_COUNT; i++) {
-    renderComponent(cardTasksContainer, makeCardTemplate());
+    renderComponent(cardTasksContainer, makeCardTemplate(),`beforeend`);
   }
 
 };
