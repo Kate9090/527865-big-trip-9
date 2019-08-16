@@ -1,4 +1,6 @@
-export const makeCardEditTemplate = () => (
+export const makeCardEditTemplate = ({
+  transferType,
+}) => (
   `<form class="trip-events__trip-sort  trip-sort" action="#" method="get">
     <span class="trip-sort__item  trip-sort__item--day">Day</span>
 
@@ -89,12 +91,7 @@ export const makeCardEditTemplate = () => (
 
             <div class="event__type-item">
               <input id="event-type-sightseeing-1" class="event__type-input  visually-hidden" type="radio" name="event-type" value="sightseeing">
-              <label class="event__type-label  event__type-label--sightseeing" for="event-type-sightseeing-1">Sightseeing</label>
-            </div>
-
-            <div class="event__type-item">
-              <input id="event-type-restaurant-1" class="event__type-input  visually-hidden" type="radio" name="event-type" value="restaurant">
-              <label class="event__type-label  event__type-label--restaurant" for="event-type-restaurant-1">Restaurant</label>
+              <label class="event__type-label  event__type-label--sightseeing" for="event-type-sightseeing-1">${transferType}</label>
             </div>
           </fieldset>
         </div>

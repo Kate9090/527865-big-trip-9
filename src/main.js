@@ -19,7 +19,7 @@ const renderMockComponents = () => {
   renderComponent(infoContainer, makeInfoTemplate(), `afterbegin`);
   renderComponent(menuContainer, makeMenuTemplate(getMenu()),`beforeend`);
   renderComponent(menuContainer, makeFilterTemplate(getFilter()),`beforeend`);
-  renderComponent(cardEditContainer, makeCardEditTemplate(),`afterbegin`);
+  renderComponent(cardEditContainer, makeCardEditTemplate(getTravelPoint()),`afterbegin`);
   for (let i = 1; i <= CARDS_COUNT; i++) {
     renderComponent(cardEditContainer, makeCardTemplate(getTravelPoint()),`beforeend`);
   }

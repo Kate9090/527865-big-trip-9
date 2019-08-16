@@ -7,6 +7,15 @@ export const getTravelPoint = () => ({
     `drive`,
     `flight`,
   ][Math.floor(Math.random() * 6)],
+  point: [
+    `Check`, `Sightseeing`, `Restaurant`,
+    `taxi`,
+    `bus`,
+    `train`,
+    `ship`,
+    `drive`,
+    `flight`,
+  ][Math.floor(Math.random() * 9)],
   city: [`Tokyo`,`Kyoto`,`Singapore`,`Seul`,`Hanoi`][Math.floor(Math.random() * 5)],
   picture: `http://picsum.photos/300/150?r=${Math.random()}`,
   description: new Set([
