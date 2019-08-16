@@ -1,5 +1,3 @@
-const COUNT_EVENTS = 1 + Math.floor(Math.random() * 2);
-
 export const makeCardTemplate = ({
   transferType,
   city,
@@ -9,7 +7,10 @@ export const makeCardTemplate = ({
   timeHours,
   timeMinutes,
   price,
-  option
+  startSlice = Math.floor(Math.random() * 2),
+  option,
+  optionNew = option.slice(startSlice, startSlice + 2),
+  countEvents = 1 + Math.floor(Math.random() * 2)
 }) => (
   `<ul class="trip-days">
     <li class="trip-days__item  day">
@@ -19,7 +20,7 @@ export const makeCardTemplate = ({
       </div>
 
       <ul class="trip-events__list">
-        ${new Array(COUNT_EVENTS).fill('').map(item => `<li class="trip-events__item">
+        ${new Array(countEvents).fill('').map(item => `<li class="trip-events__item">
           <div class="event">
             <div class="event__type">
               <img class="event__type-icon" width="42" height="42" src="img/icons/${transferType}.png" alt="Event type icon">
@@ -41,9 +42,9 @@ export const makeCardTemplate = ({
 
             <h4 class="visually-hidden">Offers:</h4>
             <ul class="event__selected-offers">
-              <li class="event__offer">
-                <span class="event__offer-title">${option}</span>
-              </li>
+              ${new Array(countEvents).fill('').map((item, i) => `<li class="event__offer">
+                <span class="event__offer-title">${optionNew[i]}</span>
+              </li>`).join('')}
             </ul>
 
             <button class="event__rollup-btn" type="button">
