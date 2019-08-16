@@ -3,7 +3,7 @@ import {makeCardTemplate} from '../src/components/card';
 import {makeFilterTemplate} from '../src/components/filter';
 import {makeMenuTemplate} from '../src/components/menu';
 import {makeInfoTemplate} from '../src/components/info';
-import {getTravelPoint} from './data';
+import {getTravelPoint, getMenu, getFilter} from './data';
 
 const CARDS_COUNT = 3;
 
@@ -17,8 +17,8 @@ const cardEditContainer = mainContainer.querySelector(`.page-body__container .tr
 
 const renderMockComponents = () => {
   renderComponent(infoContainer, makeInfoTemplate(), `afterbegin`);
-  renderComponent(menuContainer, makeMenuTemplate(),`beforeend`);
-  renderComponent(menuContainer, makeFilterTemplate(),`beforeend`);
+  renderComponent(menuContainer, makeMenuTemplate(getMenu()),`beforeend`);
+  renderComponent(menuContainer, makeFilterTemplate(getFilter()),`beforeend`);
   renderComponent(cardEditContainer, makeCardEditTemplate(),`afterbegin`);
   for (let i = 1; i <= CARDS_COUNT; i++) {
     renderComponent(cardEditContainer, makeCardTemplate(getTravelPoint()),`beforeend`);

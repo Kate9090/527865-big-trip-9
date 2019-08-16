@@ -36,6 +36,20 @@ export const getTravelPoint = () => ({
   isPast: Boolean(Math.round(Math.random())),
 });
 
+export const getMenu = () => ({
+  title: [
+    `Table`,
+    `Stats`
+  ],
+})
+
+export const getFilter = () => ({
+  title: [
+    `Everything`,
+    `Future`,
+    `Past`,
+  ]
+})
 // const getAllTasks = (tasks) => {
 //   return tasks.length;
 // };

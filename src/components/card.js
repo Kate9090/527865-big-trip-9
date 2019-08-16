@@ -1,8 +1,6 @@
 export const makeCardTemplate = ({
   transferType,
   city,
-  picture,
-  description,
   date,
   timeHours,
   timeMinutes,
