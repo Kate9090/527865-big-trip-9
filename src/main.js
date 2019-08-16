@@ -3,6 +3,7 @@ import {makeCardTemplate} from '../src/components/card';
 import {makeFilterTemplate} from '../src/components/filter';
 import {makeMenuTemplate} from '../src/components/menu';
 import {makeInfoTemplate} from '../src/components/info';
+import {getTravelPoint} from './data';
 
 const CARDS_COUNT = 3;
 
@@ -20,7 +21,7 @@ const renderMockComponents = () => {
   renderComponent(menuContainer, makeFilterTemplate(),`beforeend`);
   renderComponent(cardEditContainer, makeCardEditTemplate(),`afterbegin`);
   for (let i = 1; i <= CARDS_COUNT; i++) {
-    renderComponent(cardEditContainer, makeCardTemplate(),`beforeend`);
+    renderComponent(cardEditContainer, makeCardTemplate(getTravelPoint()),`beforeend`);
   }
 };
 

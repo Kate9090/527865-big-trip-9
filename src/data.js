@@ -1,13 +1,13 @@
 export const getTravelPoint = () => ({
   transferType: [
-    `Taxi`,
-    `Bus`,
-    `Train`,
-    `Ship`,
-    `Drive`,
-    `Flight`,
+    `taxi`,
+    `bus`,
+    `train`,
+    `ship`,
+    `drive`,
+    `flight`,
   ][Math.floor(Math.random() * 6)],
-  city: [`Tokio`,`Kioto`,`Singapur`,`Seul`,`Hanoy`][Math.floor(Math.random())],
+  city: [`Tokio`,`Kioto`,`Singapur`,`Seul`,`Hanoy`][Math.floor(Math.random() * 5)],
   picture: `http://picsum.photos/300/150?r=${Math.random()}`,
   description: new Set(
     `Lorem ipsum dolor sit amet, consectetur adipiscing elit.`,
@@ -26,12 +26,12 @@ export const getTravelPoint = () => ({
   timeHours: Math.floor(Math.random() * 23),
   timeMinutes: Math.floor(Math.random() * 59),
   price: Math.floor(Math.random() * 1000),
-  option: new Set(
-    `Add luggage +10 €,`,
+  option: [
+    `Add luggage +10 €`,
     `Switch to comfort class +150 €`,
     `Add meal +2 €`,
     `Choose seats +9 €`
-  ),
+  ][Math.floor(Math.random() * 4)],
   // dueDate: Date.now() + 1 + Math.floor(Math.random() * 7) * 24 * 60 * 60 * 1000,
   // repeatingDays: {
   //   'mo': false,
