@@ -20,7 +20,7 @@ export const makeCardTemplate = ({
       </div>
 
       <ul class="trip-events__list">
-        ${new Array(countEvents).fill('').map(item => `<li class="trip-events__item">
+        ${new Array(countEvents).fill(``).map(() => `<li class="trip-events__item">
           <div class="event">
             <div class="event__type">
               <img class="event__type-icon" width="42" height="42" src="img/icons/${transferType}.png" alt="Event type icon">
@@ -42,9 +42,9 @@ export const makeCardTemplate = ({
 
             <h4 class="visually-hidden">Offers:</h4>
             <ul class="event__selected-offers">
-              ${new Array(countEvents).fill('').map((item, i) => `<li class="event__offer">
+              ${new Array(countEvents).fill(``).map((item, i) => `<li class="event__offer">
                 <span class="event__offer-title">${optionNew[i]}</span>
-              </li>`).join('')}
+              </li>`).join(``)}
             </ul>
 
             <button class="event__rollup-btn" type="button">
