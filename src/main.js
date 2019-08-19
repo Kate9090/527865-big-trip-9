@@ -20,9 +20,17 @@ const renderMockComponents = () => {
   renderComponent(menuContainer, makeMenuTemplate(getMenu()),`beforeend`);
   renderComponent(menuContainer, makeFilterTemplate(getFilter()),`beforeend`);
   renderComponent(cardEditContainer, makeCardEditTemplate(getTravelPoint()),`afterbegin`);
-  for (let i = 1; i <= CARDS_COUNT; i++) {
-    renderComponent(cardEditContainer, makeCardTemplate(getTravelPoint()),`beforeend`);
-  }
+
+  const tripArray = new Array(CARDS_COUNT).fill(``).map(item =>
+    makeCardTemplate(getTravelPoint())
+  ).join(``)
+
+  renderComponent(cardEditContainer, tripArray,`beforeend`);
+
+  const sortTripArray = cardEditContainer.querySelectorAll(`.trip-days`)
+    // .sort((a, b) => {
+    //   a.querySelector(`.day__counter`).innerHTML - b.querySelector(`.day__counter`).innerHTML
+    // })
 };
 
 renderMockComponents();
