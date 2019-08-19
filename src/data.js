@@ -61,29 +61,8 @@ export const getFilter = () => ({
     `Past`,
   ]
 })
-// const getAllTasks = (tasks) => {
-//   return tasks.length;
-// };
 
-// const getCountType = (tasks, filterKey) => {
-//   return tasks.filter((el) => el[filterKey]).length;
-// };
-
-// export const getFilter = (tasks) => ([
-//   {
-//     title: `All`,
-//     get count() {
-//       return getAllTasks(tasks);
-//     },
-//   },
-//   {
-//     title: `Overdue`,
-//     get count() {
-//       return getCountType(tasks, this.flagName);
-//     },
-//     flagName: `isOverdue`,
-//   },
-//   {
-//     title: `Today`,
-//     get count() {
-
+export const getSchedule = () => ({
+  startPoint: [`Tokyo`,`Kyoto`,`Singapore`,`Seul`,`Hanoi`][Math.floor(Math.random() * 5)],
+  endPoint: [`Tokyo`,`Kyoto`,`Singapore`,`Seul`,`Hanoi`][Math.floor(Math.random() * 5)],
+})

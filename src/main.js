@@ -3,7 +3,7 @@ import {makeCardTemplate} from '../src/components/card';
 import {makeFilterTemplate} from '../src/components/filter';
 import {makeMenuTemplate} from '../src/components/menu';
 import {makeInfoTemplate} from '../src/components/info';
-import {getTravelPoint, getMenu, getFilter} from './data';
+import {getTravelPoint, getMenu, getFilter, getSchedule} from './data';
 
 const CARDS_COUNT = 3;
 
@@ -16,7 +16,7 @@ const menuContainer = mainContainer.querySelector(`.trip-main__trip-controls`);
 const cardEditContainer = mainContainer.querySelector(`.page-body__container .trip-events`);
 
 const renderMockComponents = () => {
-  renderComponent(infoContainer, makeInfoTemplate(), `afterbegin`);
+  renderComponent(infoContainer, makeInfoTemplate(getSchedule()), `afterbegin`);
   renderComponent(menuContainer, makeMenuTemplate(getMenu()),`beforeend`);
   renderComponent(menuContainer, makeFilterTemplate(getFilter()),`beforeend`);
   renderComponent(cardEditContainer, makeCardEditTemplate(getTravelPoint()),`afterbegin`);
