@@ -31,6 +31,19 @@ const renderMockComponents = () => {
     // .sort((a, b) => {
     //   a.querySelector(`.day__counter`).innerHTML - b.querySelector(`.day__counter`).innerHTML
     // })
+
+  let price = 0
+  sortTripArray.forEach((item) => {
+   const pointPrice = parseInt(item.querySelector(`.event__price-value`).innerHTML, 10)
+    price = price + pointPrice
+    const extraPriceArray = item.querySelectorAll(`.event__offer-title`)
+    extraPriceArray.forEach((subItem) => {
+      let extra = parseInt(subItem.innerHTML.match(/\d+/)[0], 10)
+      price = price + extra
+    })
+  })
+
+  mainContainer.querySelector(`.trip-info__cost-value`).innerHTML = price
 };
 
 renderMockComponents();
