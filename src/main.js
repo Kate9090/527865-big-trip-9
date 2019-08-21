@@ -17,10 +17,10 @@ const makeData = (createData, count = CARDS_COUNT) => {
 };
 
 const cardsData = makeData(getTravelPoint);
-console.log(cardsData)
 const calculateTotalPrice = (cards = cardsData) => {
   let totalPrice = 0;
-  totalPrice = cards.map((it) => +it.prices).reduce((first, second) => first + second);
+  totalPrice = cards.map((it) => it.price).reduce((first, second) => first + second);
+  totalPrice = totalPrice + cards.map((it) => it.options.map(option => parseInt(option.price, 10)).reduce((first, second) => first + second)).reduce((first, second) => first + second);
   return totalPrice;
 };
 

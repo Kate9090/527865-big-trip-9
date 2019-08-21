@@ -1,5 +1,6 @@
 export const randomCount = (limit) => Math.floor(Math.random() * limit);
 export const randomBoolean = () => Boolean(Math.round(Math.random()));
+const startOptionSlice = randomCount(1);
 
 export const getTravelPoint = () => ({
   transferType: [
@@ -89,7 +90,7 @@ export const getTravelPoint = () => ({
       price: `9`,
       isActive: randomBoolean(),
     },
-  ],
+  ].slice(startOptionSlice, 2 * startOptionSlice + 1),
   isFuture() {
     if(date > Date.now()) {
       return true

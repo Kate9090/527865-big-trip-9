@@ -1,5 +1,4 @@
 import {randomCount} from '../data';
-const startSlice = randomCount(2);
 const countEvents = 1 + randomCount(2);
 
 export const makeCardTemplate = ({
@@ -43,11 +42,11 @@ export const makeCardTemplate = ({
 
             <h4 class="visually-hidden">Offers:</h4>
             <ul class="event__selected-offers">
-              ${new Array(countEvents).fill(``).map((item, i) => `<li class="event__offer">
-                <span class="event__offer-title">${options[i].title}</span>
+              ${options.map((option, i) => `<li class="event__offer">
+                <span class="event__offer-title">${option.title}</span>
                 &plus;
                 &euro;&nbsp;<span class="event__offer-price">${options[i].price}</span>
-              </li>`).slice(startSlice, startSlice + 2).join(``)}
+              </li>`).join(``)}
             </ul>
 
             <button class="event__rollup-btn" type="button">
