@@ -1,3 +1,7 @@
+import {randomCount} from '../data';
+const startSlice = randomCount(2);
+const countEvents = 1 + randomCount(2);
+
 export const makeCardTemplate = ({
   transferType,
   city,
@@ -7,10 +11,7 @@ export const makeCardTemplate = ({
   timeHours,
   timeMinutes,
   price,
-  startSlice = Math.floor(Math.random() * 2),
-  option,
-  optionNew = option.slice(startSlice, startSlice + 2),
-  countEvents = 1 + Math.floor(Math.random() * 2)
+  options,
 }) => (
   `<ul class="trip-days">
     <li class="trip-days__item  day">
@@ -43,8 +44,10 @@ export const makeCardTemplate = ({
             <h4 class="visually-hidden">Offers:</h4>
             <ul class="event__selected-offers">
               ${new Array(countEvents).fill(``).map((item, i) => `<li class="event__offer">
-                <span class="event__offer-title">${optionNew[i]}</span>
-              </li>`).join(``)}
+                <span class="event__offer-title">${options[i].title}</span>
+                &plus;
+                &euro;&nbsp;<span class="event__offer-price">${options[i].price}</span>
+              </li>`).slice(startSlice, startSlice + 2).join(``)}
             </ul>
 
             <button class="event__rollup-btn" type="button">

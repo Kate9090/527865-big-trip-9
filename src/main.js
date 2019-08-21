@@ -7,6 +7,25 @@ import {getTravelPoint, getMenu, getFilter, getSchedule} from './data';
 
 const CARDS_COUNT = 3;
 
+const makeData = (createData, count = CARDS_COUNT) => {
+  let newArr = [];
+  newArr = new Array(count).fill(``).map(createData)
+  .sort((a, b) => {
+      a.day - b.day
+    });
+  return newArr;
+};
+
+const cardsData = makeData(getTravelPoint);
+console.log(cardsData)
+const calculateTotalPrice = (cards = cardsData) => {
+  let totalPrice = 0;
+  totalPrice = cards.map((it) => +it.prices).reduce((first, second) => first + second);
+  return totalPrice;
+};
+
+getTravelPoint.totalPrice = calculateTotalPrice();
+
 const renderComponent = (parent, child, place) => {
   parent.insertAdjacentHTML(place, child);
 };
@@ -21,29 +40,13 @@ const renderMockComponents = () => {
   renderComponent(menuContainer, makeFilterTemplate(getFilter()),`beforeend`);
   renderComponent(cardEditContainer, makeCardEditTemplate(getTravelPoint()),`afterbegin`);
 
-  const tripArray = new Array(CARDS_COUNT).fill(``).map(item =>
-    makeCardTemplate(getTravelPoint())
+  const tripArray = new Array(CARDS_COUNT).fill(``).map((item, i)=>
+    makeCardTemplate(cardsData[i])
   ).join(``)
 
   renderComponent(cardEditContainer, tripArray,`beforeend`);
 
-  const sortTripArray = cardEditContainer.querySelectorAll(`.trip-days`)
-    // .sort((a, b) => {
-    //   a.querySelector(`.day__counter`).innerHTML - b.querySelector(`.day__counter`).innerHTML
-    // })
-
-  let price = 0
-  sortTripArray.forEach((item) => {
-   const pointPrice = parseInt(item.querySelector(`.event__price-value`).innerHTML, 10)
-    price = price + pointPrice
-    const extraPriceArray = item.querySelectorAll(`.event__offer-title`)
-    extraPriceArray.forEach((subItem) => {
-      let extra = parseInt(subItem.innerHTML.match(/\d+/)[0], 10)
-      price = price + extra
-    })
-  })
-
-  mainContainer.querySelector(`.trip-info__cost-value`).innerHTML = price
+  mainContainer.querySelector(`.trip-info__cost-value`).innerHTML = getTravelPoint.totalPrice;
 };
 
 renderMockComponents();

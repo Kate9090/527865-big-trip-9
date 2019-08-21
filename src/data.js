@@ -1,4 +1,5 @@
 export const randomCount = (limit) => Math.floor(Math.random() * limit);
+export const randomBoolean = () => Boolean(Math.round(Math.random()));
 
 export const getTravelPoint = () => ({
   transferType: [
@@ -66,6 +67,28 @@ export const getTravelPoint = () => ({
     `Switch to comfort class +150 €`,
     `Add meal +2 €`,
     `Choose seats +9 €`
+  ],
+  options: [
+    {
+      title: `Add luggage`,
+      price: `10`,
+      isActive: randomBoolean(),
+    },
+    {
+      title: `Switch to comfort class`,
+      price: `150`,
+      isActive: randomBoolean(),
+    },
+    {
+      title: `Add meal`,
+      price: `2`,
+      isActive: randomBoolean(),
+    },
+    {
+      title: `Choose seat`,
+      price: `9`,
+      isActive: randomBoolean(),
+    },
   ],
   isFuture() {
     if(date > Date.now()) {
