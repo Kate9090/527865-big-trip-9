@@ -1,5 +1,4 @@
 export const randomCount = (limit) => Math.floor(Math.random() * limit);
-const randomBoolean = () => Boolean(Math.round(Math.random()));
 
 export const getTravelPoint = () => ({
   transferType: [
@@ -9,7 +8,7 @@ export const getTravelPoint = () => ({
     `ship`,
     `drive`,
     `flight`,
-  ][Math.floor(Math.random() * 6)],
+  ][randomCount(6)],
   point: [
     `Check`,
     `Sightseeing`,
@@ -20,7 +19,7 @@ export const getTravelPoint = () => ({
     `ship`,
     `drive`,
     `flight`,
-  ][Math.floor(Math.random() * 9)],
+  ][randomCount(9)],
   transfer: [
     `taxi`,
     `bus`,
@@ -34,7 +33,7 @@ export const getTravelPoint = () => ({
     `Sightseeing`,
     `Restaurant`
   ],
-  city: [`Tokyo`,`Kyoto`,`Singapore`,`Seul`,`Hanoi`][Math.floor(Math.random() * 5)],
+  city: [`Tokyo`,`Kyoto`,`Singapore`,`Seul`,`Hanoi`][randomCount(5)],
   pictures: new Set([
     `http://picsum.photos/300/150?r=${Math.random()}`,
     `http://picsum.photos/300/150?r=${Math.random()}`,
@@ -56,12 +55,12 @@ export const getTravelPoint = () => ({
     `Nunc fermentum tortor ac porta dapibus.`,
     `In rutrum ac purus sit amet tempus.`
   ]),
-  date: Date.now() + 1 + Math.floor(Math.random() * 7) * 24 * 60 * 60 * 1000,
-  day: 1 + Math.floor(Math.random() * 30),
+  date: Date.now() + 1 + randomCount(7) * 24 * 60 * 60 * 1000,
+  day: 1 + randomCount(30),
   month: `August`,
-  timeHours: Math.floor(Math.random() * 23),
-  timeMinutes: Math.floor(Math.random() * 59),
-  price: Math.floor(Math.random() * 1000),
+  timeHours: randomCount(23),
+  timeMinutes: randomCount(59),
+  price: randomCount(1000),
   option: [
     `Add luggage +10 €`,
     `Switch to comfort class +150 €`,
@@ -98,6 +97,6 @@ export const getFilter = () => ({
 })
 
 export const getSchedule = () => ({
-  startPoint: [`Tokyo`,`Kyoto`,`Singapore`,`Seul`,`Hanoi`][Math.floor(Math.random() * 5)],
-  endPoint: [`Tokyo`,`Kyoto`,`Singapore`,`Seul`,`Hanoi`][Math.floor(Math.random() * 5)],
+  startPoint: [`Tokyo`,`Kyoto`,`Singapore`,`Seul`,`Hanoi`][randomCount(5)],
+  endPoint: [`Tokyo`,`Kyoto`,`Singapore`,`Seul`,`Hanoi`][randomCount(5)],
 })
