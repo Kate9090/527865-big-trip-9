@@ -1,3 +1,6 @@
+export const randomCount = (limit) => Math.floor(Math.random() * limit);
+const randomBoolean = () => Boolean(Math.round(Math.random()));
+
 export const getTravelPoint = () => ({
   transferType: [
     `taxi`,
@@ -8,7 +11,9 @@ export const getTravelPoint = () => ({
     `flight`,
   ][Math.floor(Math.random() * 6)],
   point: [
-    `Check`, `Sightseeing`, `Restaurant`,
+    `Check`,
+    `Sightseeing`,
+    `Restaurant`,
     `taxi`,
     `bus`,
     `train`,
@@ -16,8 +21,28 @@ export const getTravelPoint = () => ({
     `drive`,
     `flight`,
   ][Math.floor(Math.random() * 9)],
+  transfer: [
+    `taxi`,
+    `bus`,
+    `train`,
+    `ship`,
+    `drive`,
+    `flight`,
+  ],
+  activity: [
+    `Check-in`,
+    `Sightseeing`,
+    `Restaurant`
+  ],
   city: [`Tokyo`,`Kyoto`,`Singapore`,`Seul`,`Hanoi`][Math.floor(Math.random() * 5)],
-  picture: `http://picsum.photos/300/150?r=${Math.random()}`,
+  pictures: new Set([
+    `http://picsum.photos/300/150?r=${Math.random()}`,
+    `http://picsum.photos/300/150?r=${Math.random()}`,
+    `http://picsum.photos/300/150?r=${Math.random()}`,
+    `http://picsum.photos/300/150?r=${Math.random()}`,
+    `http://picsum.photos/300/150?r=${Math.random()}`,
+    `http://picsum.photos/300/150?r=${Math.random()}`
+  ]),
   description: new Set([
     `Lorem ipsum dolor sit amet, consectetur adipiscing elit.`,
     `Cras aliquet varius magna, non porta ligula feugiat eget.`,
@@ -43,8 +68,18 @@ export const getTravelPoint = () => ({
     `Add meal +2 €`,
     `Choose seats +9 €`
   ],
-  isFuture: Boolean(Math.round(Math.random())),
-  isPast: Boolean(Math.round(Math.random())),
+  isFuture() {
+    if(date > Date.now()) {
+      return true
+    }
+    return false
+  },
+  isPast() {
+    if(date < Date.now()) {
+      return true
+    }
+    return false
+  },
 });
 
 export const getMenu = () => ({
