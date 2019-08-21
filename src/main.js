@@ -17,8 +17,8 @@ const cardsData = makeData(getTravelPoint);
 
 const calculateTotalPrice = (cards = cardsData) => {
   let totalPrice = 0;
-  totalPrice = cards.map((it) => it.price).reduce((first, second) => first + second);
-  totalPrice = totalPrice + cards.map((it) => it.options.map(option => parseInt(option.price, 10)).reduce((first, second) => first + second)).reduce((first, second) => first + second);
+  totalPrice = cards.map((it) => it.price * it.countEvents).reduce((first, second) => first + second);
+  totalPrice = totalPrice + cards.map((it) => it.countEvents * it.options.map(option => parseInt(option.price, 10)).reduce((first, second) => first + second)).reduce((first, second) => first + second);
   return totalPrice;
 };
 

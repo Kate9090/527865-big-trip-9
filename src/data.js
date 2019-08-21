@@ -81,6 +81,7 @@ export const getTravelPoint = () => ({
       isActive: randomBoolean(),
     },
   ].slice(startOptionSlice, 2 * startOptionSlice + 1),
+  countEvents: 1 + randomCount(2),
   isFuture() {
     if(date > Date.now()) {
       return true

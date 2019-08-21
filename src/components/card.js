@@ -1,5 +1,4 @@
 import {randomCount} from '../data';
-const countEvents = 1 + randomCount(2);
 
 export const makeCardTemplate = ({
   city,
@@ -7,6 +6,7 @@ export const makeCardTemplate = ({
   options,
   price,
   transferType,
+  countEvents
 }) => (
   `<ul class="trip-days">
     <li class="trip-days__item  day">
