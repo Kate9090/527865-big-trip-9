@@ -9,18 +9,18 @@ const CARDS_COUNT = 3;
 
 const makeData = (createData, count = CARDS_COUNT) => {
   let newArr = [];
-  newArr = new Array(count).fill(``).map(createData)
-  .sort((a, b) => {
-      a.day - b.day
-    });
+  newArr = new Array(count).fill(``).map(createData).sort((a, b) => a.day - b.day);
   return newArr;
 };
 
 const cardsData = makeData(getTravelPoint);
+
+console.log(cardsData.map((it) => it.day))
+
 const calculateTotalPrice = (cards = cardsData) => {
   let totalPrice = 0;
   totalPrice = cards.map((it) => it.price).reduce((first, second) => first + second);
-  totalPrice = totalPrice + cards.map((it) => it.options.map(option => parseInt(option.price, 10)).reduce((first, second) => first + second)).reduce((first, second) => first + second);
+  // totalPrice = totalPrice + cards.map((it) => it.options.map(option => parseInt(option.price, 10)).reduce((first, second) => first + second)).reduce((first, second) => first + second);
   return totalPrice;
 };
 
