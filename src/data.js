@@ -63,12 +63,6 @@ export const getTravelPoint = () => ({
   timeHours: randomCount(23),
   timeMinutes: randomCount(59),
   price: randomCount(1000),
-  option: [
-    `Add luggage +10 €`,
-    `Switch to comfort class +150 €`,
-    `Add meal +2 €`,
-    `Choose seats +9 €`
-  ],
   options: [
     {
       title: `Add luggage`,
