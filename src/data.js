@@ -100,14 +100,14 @@ export const getTravelPoint = () => ({
 });
 
 export const getMenu = () => ({
-  title: [
+  titles: [
     `Table`,
     `Stats`
   ],
 })
 
 export const getFilter = () => ({
-  title: [
+  titles: [
     `Everything`,
     `Future`,
     `Past`,

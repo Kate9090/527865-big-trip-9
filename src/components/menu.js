@@ -1,8 +1,7 @@
 export const makeMenuTemplate = ({
-  title,
-  count = title.length
+  titles,
 }) => (
   `<nav class="trip-controls__trip-tabs  trip-tabs">
-    ${new Array(count).fill(``).map((item, i) => `<a class="trip-tabs__btn" href="#">${title[i]}</a>`).join(``)}
+    ${titles.map((title) => `<a class="trip-tabs__btn" href="#">${title}</a>`).join(``)}
   </nav>`
 );

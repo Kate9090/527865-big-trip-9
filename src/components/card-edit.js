@@ -2,12 +2,11 @@ import {randomCount} from '../data';
 const sliceStart = randomCount(9);
 
 export const makeCardEditTemplate = ({
+  activity,
   description = ``,
-  transfer,
-  pictures = ``,
   options,
-  pointsArray,
-  activity
+  pictures = ``,
+  transfer,
 }) => (
   `<form class="trip-events__trip-sort  trip-sort" action="#" method="get">
     <span class="trip-sort__item  trip-sort__item--day">Day</span>
