@@ -57,11 +57,7 @@ export const getTravelPoint = () => ({
     `Nunc fermentum tortor ac porta dapibus.`,
     `In rutrum ac purus sit amet tempus.`
   ]),
-  date: Date.now() + 1 + randomCount(7) * 24 * 60 * 60 * 1000,
-  day: 1 + randomCount(30),
-  month: `August`,
-  timeHours: randomCount(23),
-  timeMinutes: randomCount(59),
+  date: Date.now() + 1 + randomCount(7) * randomCount(24) * randomCount(60) * randomCount(60) * randomCount(1000),
   price: randomCount(1000),
   options: [
     {

@@ -9,13 +9,11 @@ const CARDS_COUNT = 3;
 
 const makeData = (createData, count = CARDS_COUNT) => {
   let newArr = [];
-  newArr = new Array(count).fill(``).map(createData).sort((a, b) => a.day - b.day);
+  newArr = new Array(count).fill(``).map(createData).sort((a, b) => a.date - b.date);
   return newArr;
 };
 
 const cardsData = makeData(getTravelPoint);
-
-console.log(cardsData.map((it) => it.day))
 
 const calculateTotalPrice = (cards = cardsData) => {
   let totalPrice = 0;
