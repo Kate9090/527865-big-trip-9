@@ -11,8 +11,8 @@ export const makeCardTemplate = ({
   `<ul class="trip-days">
     <li class="trip-days__item  day">
       <div class="day__info">
-        <span class="day__counter">${new Date(date).getDate()}</span>
-        <time class="day__date" datetime="2019-03-18">${new Date(date).getMonth()} 19</time>
+        <span class="day__counter">${date.getDate()}</span>
+        <time class="day__date" datetime="2019-03-18">${date.getMonth()} 19</time>
       </div>
 
       <ul class="trip-events__list">
@@ -25,9 +25,9 @@ export const makeCardTemplate = ({
 
             <div class="event__schedule">
               <p class="event__time">
-                <time class="event__start-time" datetime="${date}">${new Date(date).getHours()}:${new Date(date).getMinutes()}</time>
+                <time class="event__start-time" datetime="${date}">${date.getHours()}:${date.getMinutes()}</time>
                 &mdash;
-                <time class="event__end-time" datetime="${date + randomCount(24) * randomCount(60) * randomCount(60) * 1000}">${new Date(date).getHours() + 1}:${new Date(date).getMinutes()}</time>
+                <time class="event__end-time" datetime="${date + randomCount(24) * randomCount(60) * randomCount(60) * 1000}">${date.getHours() + 1}:${date.getMinutes()}</time>
               </p>
               <p class="event__duration">1H 30M</p>
             </div>

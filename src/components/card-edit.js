@@ -3,9 +3,9 @@ const sliceStart = randomCount(9);
 
 export const makeCardEditTemplate = ({
   activity,
-  description = ``,
+  description,
   options,
-  pictures = ``,
+  pictures,
   transfer,
 }) => (
   `<form class="trip-events__trip-sort  trip-sort" action="#" method="get">
