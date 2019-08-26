@@ -1,5 +1,3 @@
-import {randomCount} from '../data';
-
 export const makeCardTemplate = ({
   city,
   date,
