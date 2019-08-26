@@ -57,39 +57,42 @@ export const getTravelPoint = () => ({
     `Nunc fermentum tortor ac porta dapibus.`,
     `In rutrum ac purus sit amet tempus.`
   ]),
+  descriptionStartCentanceNumber: randomCount(9),
+  descriptionEndCentanceNumber: 1 + randomCount(2),
   date: new Date(Date.now() + 1 + randomCount(7) * 24 * 60 * 60 * 1000),
+  durationOfTripPoint: randomCount(24) * randomCount(60) * 60 * 1000,
   price: randomCount(1000),
   options: [
     {
       title: `Add luggage`,
-      price: `10`,
+      price: 10,
       isActive: randomBoolean(),
     },
     {
       title: `Switch to comfort class`,
-      price: `150`,
+      price: 150,
       isActive: randomBoolean(),
     },
     {
       title: `Add meal`,
-      price: `2`,
+      price: 2,
       isActive: randomBoolean(),
     },
     {
       title: `Choose seat`,
-      price: `9`,
+      price: 9,
       isActive: randomBoolean(),
     },
   ].slice(startOptionSlice, 2 * startOptionSlice + 1),
-  countEvents: 1 + randomCount(2),
+  countTripPointsPerDay: 1 + randomCount(2),
   isFuture() {
-    if(date > Date.now()) {
+    if (this.date > Date(Date.now())) {
       return true
     }
     return false
   },
   isPast() {
-    if(date < Date.now()) {
+    if (this.date < Date(Date.now())) {
       return true
     }
     return false

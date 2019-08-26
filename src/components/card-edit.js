@@ -1,9 +1,8 @@
-import {randomCount} from '../data';
-const sliceStart = randomCount(9);
-
 export const makeCardEditTemplate = ({
   activity,
   description,
+  descriptionStartCentanceNumber,
+  descriptionEndCentanceNumber,
   options,
   pictures,
   transfer,
@@ -138,7 +137,7 @@ export const makeCardEditTemplate = ({
       <section class="event__section  event__section--destination">
         <h3 class="event__section-title  event__section-title--destination">Destination</h3>
         ${Array.from(description)
-          .slice(sliceStart, 1 + sliceStart + randomCount(2))
+          .slice(descriptionStartCentanceNumber, descriptionStartCentanceNumber + descriptionEndCentanceNumber)
           .map((sentence) => `<p class="event__destination-description">${sentence}</p>`).join(``)}
 
         <div class="event__photos-container">

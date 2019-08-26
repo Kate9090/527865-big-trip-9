@@ -15,10 +15,23 @@ const makeData = (createData, count = CARDS_COUNT) => {
 
 const cardsData = makeData(getTravelPoint);
 
+const sumArrayItems = (array) => {
+  return array.reduce((sum, current) => sum + current, 0);
+};
+
 const calculateTotalPrice = (cards = cardsData) => {
+  let optionsPrice = 0;
   let totalPrice = 0;
-  totalPrice = cards.map((it) => it.price * it.countEvents).reduce((first, second) => first + second);
-  totalPrice = totalPrice + cards.map((it) => it.countEvents * it.options.map(option => parseInt(option.price, 10)).reduce((first, second) => first + second)).reduce((first, second) => first + second);
+  totalPrice = sumArrayItems(cards.map((it) => it.price * it.countTripPointsPerDay));
+
+  optionsPrice = sumArrayItems(cards
+    .map((it) => it.countTripPointsPerDay * sumArrayItems(it.options
+        .map((option) => option.price)
+      )
+    )
+  );
+
+  totalPrice = totalPrice + optionsPrice;
   return totalPrice;
 };
 

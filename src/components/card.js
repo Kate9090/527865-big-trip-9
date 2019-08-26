@@ -3,10 +3,11 @@ import {randomCount} from '../data';
 export const makeCardTemplate = ({
   city,
   date,
+  durationOfTripPoint,
   options,
   price,
   transferType,
-  countEvents
+  countTripPointsPerDay
 }) => (
   `<ul class="trip-days">
     <li class="trip-days__item  day">
@@ -16,7 +17,7 @@ export const makeCardTemplate = ({
       </div>
 
       <ul class="trip-events__list">
-        ${new Array(countEvents).fill(``).map(() => `<li class="trip-events__item">
+        ${new Array(countTripPointsPerDay).fill(``).map(() => `<li class="trip-events__item">
           <div class="event">
             <div class="event__type">
               <img class="event__type-icon" width="42" height="42" src="img/icons/${transferType}.png" alt="Event type icon">
@@ -27,7 +28,7 @@ export const makeCardTemplate = ({
               <p class="event__time">
                 <time class="event__start-time" datetime="${date}">${date.getHours()}:${date.getMinutes()}</time>
                 &mdash;
-                <time class="event__end-time" datetime="${date + randomCount(24) * randomCount(60) * randomCount(60) * 1000}">${date.getHours() + 1}:${date.getMinutes()}</time>
+                <time class="event__end-time" datetime="${date + durationOfTripPoint}">${date.getHours() + 1}:${date.getMinutes()}</time>
               </p>
               <p class="event__duration">1H 30M</p>
             </div>
