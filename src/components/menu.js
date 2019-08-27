@@ -1,6 +1,7 @@
-export const makeMenuTemplate = () => (
+export const makeMenuTemplate = ({
+  titles,
+}) => (
   `<nav class="trip-controls__trip-tabs  trip-tabs">
-    <a class="trip-tabs__btn  trip-tabs__btn--active" href="#">Table</a>
-    <a class="trip-tabs__btn" href="#">Stats</a>
+    ${titles.map((title) => `<a class="trip-tabs__btn" href="#">${title}</a>`).join(``)}
   </nav>`
 );
