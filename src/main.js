@@ -1,9 +1,10 @@
-import {makeCardEditTemplate} from '../src/components/card-edit';
-import {makeCardTemplate} from '../src/components/card';
-import {makeFilterTemplate} from '../src/components/filter';
-import {makeMenuTemplate} from '../src/components/menu';
-import {makeInfoTemplate} from '../src/components/info';
+import {CardEditForm} from '../src/components/card-edit';
+import {Card} from '../src/components/card';
+import {Filter} from '../src/components/filter';
+import {Menu} from '../src/components/menu';
+import {Info} from '../src/components/info';
 import {getTravelPoint, getMenu, getFilter, getSchedule} from './data';
+import {render, Position, removeElement} from './utils';
 
 const CARDS_COUNT = 3;
 
@@ -37,27 +38,30 @@ const calculateTotalPrice = (cards = cardsData) => {
 
 getTravelPoint.totalPrice = calculateTotalPrice();
 
-const renderComponent = (parent, child, place) => {
-  parent.insertAdjacentHTML(place, child);
-};
 const mainContainer = document.querySelector(`.page-body`);
 const infoContainer = mainContainer.querySelector(`.trip-main__trip-info`);
 const menuContainer = mainContainer.querySelector(`.trip-main__trip-controls`);
 const cardEditContainer = mainContainer.querySelector(`.page-body__container .trip-events`);
 
-const renderMockComponents = () => {
-  renderComponent(infoContainer, makeInfoTemplate(getSchedule()), `afterbegin`);
-  renderComponent(menuContainer, makeMenuTemplate(getMenu()),`beforeend`);
-  renderComponent(menuContainer, makeFilterTemplate(getFilter()),`beforeend`);
-  renderComponent(cardEditContainer, makeCardEditTemplate(getTravelPoint()),`afterbegin`);
+const info = new Info();
+const menu = new Menu();
+const filter = new Filter();
+const cardEditForm = new CardEditForm();
 
-  const tripArray = new Array(CARDS_COUNT).fill(``).map((item, i)=>
-    makeCardTemplate(cardsData[i])
-  ).join(``)
+render(infoContainer, info.getElement(), Position.AFTERBEGIN);
+render(menuContainer, menu.getElement(), Position.BEFOREEND);
+render(menuContainer, filter.getElement(), Position.BEFOREEND);
+render(cardEditContainer, cardEditForm.getElement(), Position.AFTERBEGIN);
 
-  renderComponent(cardEditContainer, tripArray,`beforeend`);
+// const renderMockComponents = () => {
 
-  mainContainer.querySelector(`.trip-info__cost-value`).innerHTML = getTravelPoint.totalPrice;
-};
+//   const tripArray = new Array(CARDS_COUNT).fill(``).map((item, i)=>
+//     makeCardTemplate(cardsData[i])
+//   ).join(``)
 
-renderMockComponents();
+//   renderComponent(cardEditContainer, tripArray,`beforeend`);
+
+//   mainContainer.querySelector(`.trip-info__cost-value`).innerHTML = getTravelPoint.totalPrice;
+// };
+
+// renderMockComponents();
