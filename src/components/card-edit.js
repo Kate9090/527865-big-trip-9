@@ -76,7 +76,7 @@ export class CardEditForm {
             <fieldset class="event__type-group">
               <legend class="visually-hidden">Transfer</legend>
 
-              ${transfer.map((point) => `<div class="event__type-item">
+              ${this._transfer.map((point) => `<div class="event__type-item">
                 <input id="event-type-taxi-1" class="event__type-input  visually-hidden" type="radio" name="event-type" value="${point}">
                 <label class="event__type-label  event__type-label--${point.toLowerCase()}" for="event-type-${point.toLowerCase()}-1">${point}</label>
               </div>`).join(``)}
@@ -86,7 +86,7 @@ export class CardEditForm {
             <fieldset class="event__type-group">
               <legend class="visually-hidden">Activity</legend>
 
-              ${activity.map((activityItem) => `<div class="event__type-item">
+              ${this._activity.map((activityItem) => `<div class="event__type-item">
                 <input id="event-type-${activityItem.toLowerCase()}-1" class="event__type-input  visually-hidden" type="radio" name="event-type" value="${activityItem}">
                 <label class="event__type-label  event__type-label--${activityItem.toLowerCase()}" for="event-type-${activityItem.toLowerCase()}-1">${activityItem}</label>
               </div>`).join(``)}
@@ -148,7 +148,7 @@ export class CardEditForm {
           <h3 class="event__section-title  event__section-title--offers">Offers</h3>
 
           <div class="event__available-offers">
-            ${options.map((optionKind) => `<div class="event__offer-selector">
+            ${this._options.map((optionKind) => `<div class="event__offer-selector">
               <input class="event__offer-checkbox  visually-hidden" id="event-offer-luggage-1" type="checkbox" name="event-offer-luggage" checked="${optionKind.isActive} ? checked">
               <label class="event__offer-label" for="event-offer-luggage-1">
                 <span class="event__offer-title">${optionKind.title}</span>
@@ -161,14 +161,14 @@ export class CardEditForm {
 
         <section class="event__section  event__section--destination">
           <h3 class="event__section-title  event__section-title--destination">Destination</h3>
-          ${Array.from(description)
-            .slice(descriptionStartCentanceNumber, descriptionStartCentanceNumber + descriptionEndCentanceNumber)
+          ${Array.from(this._description)
+            .slice(this._descriptionStartCentanceNumber, this._descriptionStartCentanceNumber + this._descriptionEndCentanceNumber)
             .map((sentence) => `<p class="event__destination-description">${sentence}</p>`).join(``)}
 
           <div class="event__photos-container">
             <div class="event__photos-tape">
 
-            ${Array.from(pictures)
+            ${Array.from(this._pictures)
               .map((picture) => `<img class="event__photo" src="${picture}"/>`).join(``)}
             </div>
           </div>

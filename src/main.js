@@ -43,18 +43,23 @@ const infoContainer = mainContainer.querySelector(`.trip-main__trip-info`);
 const menuContainer = mainContainer.querySelector(`.trip-main__trip-controls`);
 const cardEditContainer = mainContainer.querySelector(`.page-body__container .trip-events`);
 
-const info = new Info();
-const menu = new Menu();
-const filter = new Filter();
-const cardEditForm = new CardEditForm();
+const info = new Info(getSchedule());
+const menu = new Menu(getMenu());
+const filter = new Filter(getFilter());
+const cardEditForm = new CardEditForm(getTravelPoint());
 
 render(infoContainer, info.getElement(), Position.AFTERBEGIN);
 render(menuContainer, menu.getElement(), Position.BEFOREEND);
 render(menuContainer, filter.getElement(), Position.BEFOREEND);
 render(cardEditContainer, cardEditForm.getElement(), Position.AFTERBEGIN);
 
-// const renderMockComponents = () => {
+const renderCard = (cardMock) => {
+  const card = new Card(cardMock);
 
+  render(cardEditContainer, card.getElement(), Position.BEFOREEND);
+}
+
+cardsData.forEach((cardMock) => renderCard(cardMock));
 //   const tripArray = new Array(CARDS_COUNT).fill(``).map((item, i)=>
 //     makeCardTemplate(cardsData[i])
 //   ).join(``)
