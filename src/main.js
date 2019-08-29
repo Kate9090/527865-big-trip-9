@@ -82,6 +82,12 @@ const renderCard = (cardMock, i) => {
       document.addEventListener(`keydown`, onEscKeyDown);
     });
 
+  cardEditForm.getElement().querySelector(`.event__rollup-btn`)
+    .addEventListener(`click`, () => {
+      cardsContainer.replaceChild(card.getElement(), cardEditForm.getElement());
+      document.removeEventListener(`keydown`, onEscKeyDown);
+    });
+
   cardEditForm.getElement().querySelector(`.event__save-btn`)
     .addEventListener(`click`, () => {
       cardsContainer.replaceChild(card.getElement(), cardEditForm.getElement());
