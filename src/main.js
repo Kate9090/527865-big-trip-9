@@ -7,7 +7,7 @@ import {Card} from '../src/components/card';
 import {Filter} from '../src/components/filter';
 import {Menu} from '../src/components/menu';
 import {Info} from '../src/components/info';
-import {getTravelPoint, getMenu, getFilter, getSchedule} from './data';
+import {getTravelPoint, getMenu, getFilter, getSchedule, randomBoolean} from './data';
 import {render, Position, removeElement} from './utils';
 
 const CARDS_COUNT = 3;
@@ -46,7 +46,6 @@ const mainContainer = document.querySelector(`.page-body`);
 const infoContainer = mainContainer.querySelector(`.trip-main__trip-info`);
 const menuContainer = mainContainer.querySelector(`.trip-main__trip-controls`);
 const tripEventsContainer = mainContainer.querySelector(`.page-body__container .trip-events`);
-// const cardEditContainer = cardsContainer.querySelector(`.trip-events__item`);
 
 const info = new Info(getSchedule());
 const menu = new Menu(getMenu());
@@ -67,6 +66,7 @@ const renderCard = (cardMock, i) => {
   render(tripDaysItem, cardsList.getElement(), Position.BEFOREEND);
 
   const cardsContainer = tripDaysItem.querySelector(`.trip-events__list`)
+  
   render(cardsContainer, card.getElement(), Position.BEFOREEND);
 
   const onEscKeyDown = (evt) => {
@@ -96,3 +96,4 @@ render(tripEventsContainer, cardsHeader.getElement(), Position.AFTERBEGIN);
 render(tripEventsContainer, cardDaysList.getElement(), Position.BEFOREEND);
 
 cardsData.forEach((cardMock, i) => renderCard(cardMock, i));
+mainContainer.querySelector(`.trip-info__cost-value`).innerHTML = getTravelPoint.totalPrice;
