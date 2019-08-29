@@ -46,15 +46,33 @@ const cardEditContainer = mainContainer.querySelector(`.page-body__container .tr
 const info = new Info(getSchedule());
 const menu = new Menu(getMenu());
 const filter = new Filter(getFilter());
-const cardEditForm = new CardEditForm(getTravelPoint());
 
 render(infoContainer, info.getElement(), Position.AFTERBEGIN);
 render(menuContainer, menu.getElement(), Position.BEFOREEND);
 render(menuContainer, filter.getElement(), Position.BEFOREEND);
-render(cardEditContainer, cardEditForm.getElement(), Position.AFTERBEGIN);
 
 const renderCard = (cardMock) => {
   const card = new Card(cardMock);
+  const cardEditForm = new CardEditForm(cardMock);
+
+  const onEscKeyDown = (evt) => {
+    if (evt.key === `Escape` || evt.key === `Esc`) {
+      cardEditContainer.replaceChild(card.getElement(), cardEditForm.getElement());
+      document.removeEventListener(`keydown`, onEscKeyDown);
+    }
+  }
+
+  card.getElement().querySelector(`.event__rollup-btn`)
+    .addEventListener(`click`, () => {
+      cardEditContainer.replaceChild(cardEditForm.getElement(), card.getElement());
+      document.addEventListener(`keydown`, onEscKeyDown);
+    });
+
+  cardEditForm.getElement().querySelector(`.event__save-btn`)
+    .addEventListener(`click`, () => {
+      cardEditContainer.replaceChild(card.getElement(), cardEditForm.getElement());
+      document.removeEventListener(`keydown`, onEscKeyDown);
+    });
 
   render(cardEditContainer, card.getElement(), Position.BEFOREEND);
 }
