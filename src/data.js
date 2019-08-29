@@ -60,6 +60,7 @@ export const getTravelPoint = () => ({
   descriptionStartCentanceNumber: randomCount(9),
   descriptionEndCentanceNumber: 1 + randomCount(2),
   date: new Date(Date.now() + 1 + randomCount(7) * 24 * 60 * 60 * 1000),
+  monthNamesShort: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
   durationOfTripPoint: randomCount(24) * randomCount(60) * 60 * 1000,
   price: randomCount(1000),
   options: [

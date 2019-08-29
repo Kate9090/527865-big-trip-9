@@ -22,11 +22,11 @@ export const createElement = (template)  => {
         container.append(element);
         break;
     }
-  };
+  }
   
   export const unrender = (element) => {
     if (element) {
       element.remove();
     }
-  };
+  }
   
