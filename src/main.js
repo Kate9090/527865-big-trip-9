@@ -65,7 +65,35 @@ const renderCard = (cardMock, i) => {
   const tripDaysItem = tripEventsContainer.querySelectorAll(`.trip-days__item`)[i]
   render(tripDaysItem, cardsList.getElement(), Position.BEFOREEND);
 
-  const cardsContainer = tripDaysItem.querySelector(`.trip-events__list`)
+  const cardsContainer = tripDaysItem.querySelector(`.trip-events__list`);
+
+  const event = (card) => {
+    const onEscKeyDown = (evt) => {
+      if (evt.key === `Escape` || evt.key === `Esc`) {
+        card = evt.target.closest(`.trip-events__item`);
+        cardsContainer.replaceChild(card, cardEditForm.getElement());
+        document.removeEventListener(`keydown`, onEscKeyDown);
+      }
+    }
+  
+    card.getElement().querySelector(`.event__rollup-btn`)
+      .addEventListener(`click`, () => {
+        cardsContainer.replaceChild(cardEditForm.getElement(), card.getElement());
+        document.addEventListener(`keydown`, onEscKeyDown);
+      });
+  
+    cardEditForm.getElement().querySelector(`.event__rollup-btn`)
+      .addEventListener(`click`, () => {
+        cardsContainer.replaceChild(card.getElement(), cardEditForm.getElement());
+        document.removeEventListener(`keydown`, onEscKeyDown);
+      });
+
+    cardEditForm.getElement().querySelector(`.event__save-btn`)
+      .addEventListener(`click`, () => {
+        cardsContainer.replaceChild(card.getElement(), cardEditForm.getElement());
+        document.removeEventListener(`keydown`, onEscKeyDown);
+      });
+  }
   
   render(cardsContainer, card.getElement(), Position.BEFOREEND);
 
@@ -73,32 +101,11 @@ const renderCard = (cardMock, i) => {
     const cardsMoreContainer = tripDaysItem.querySelector(`.trip-events__list`);
     const cardMore = new Card(cardMock);
     render(cardsMoreContainer, cardMore.getElement(), Position.BEFOREEND);
+    
+    event(cardMore);
   }
 
-  const onEscKeyDown = (evt) => {
-    if (evt.key === `Escape` || evt.key === `Esc`) {
-      cardsContainer.replaceChild(card.getElement(), cardEditForm.getElement());
-      document.removeEventListener(`keydown`, onEscKeyDown);
-    }
-  }
-
-  card.getElement().querySelector(`.event__rollup-btn`)
-    .addEventListener(`click`, () => {
-      cardsContainer.replaceChild(cardEditForm.getElement(), card.getElement());
-      document.addEventListener(`keydown`, onEscKeyDown);
-    });
-
-  cardEditForm.getElement().querySelector(`.event__rollup-btn`)
-    .addEventListener(`click`, () => {
-      cardsContainer.replaceChild(card.getElement(), cardEditForm.getElement());
-      document.removeEventListener(`keydown`, onEscKeyDown);
-    });
-
-  cardEditForm.getElement().querySelector(`.event__save-btn`)
-    .addEventListener(`click`, () => {
-      cardsContainer.replaceChild(card.getElement(), cardEditForm.getElement());
-      document.removeEventListener(`keydown`, onEscKeyDown);
-    });
+  event(card);
 }
 
 render(infoContainer, info.getElement(), Position.AFTERBEGIN);
