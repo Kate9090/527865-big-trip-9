@@ -19,7 +19,6 @@ const makeData = (createData, count = CARDS_COUNT) => {
 };
 
 const cardsData = makeData(getTravelPoint);
-console.log(getTravelPoint)
 
 const sumArrayItems = (array) => {
   return array.reduce((sum, current) => sum + current, 0);
@@ -69,6 +68,12 @@ const renderCard = (cardMock, i) => {
   const cardsContainer = tripDaysItem.querySelector(`.trip-events__list`)
   
   render(cardsContainer, card.getElement(), Position.BEFOREEND);
+
+  if (cardMock.countTripPointsPerDay > 1) {
+    const cardsMoreContainer = tripDaysItem.querySelector(`.trip-events__list`);
+    const cardMore = new Card(cardMock);
+    render(cardsMoreContainer, cardMore.getElement(), Position.BEFOREEND);
+  }
 
   const onEscKeyDown = (evt) => {
     if (evt.key === `Escape` || evt.key === `Esc`) {

@@ -34,7 +34,7 @@ export class Card {
   }
 
   getTemplate() {
-    return `${new Array(this._countTripPointsPerDay).fill(``).map(() => `<li class="trip-events__item">
+    return `<li class="trip-events__item">
       <div class="event">
         <div class="event__type">
           <img class="event__type-icon" width="42" height="42" src="img/icons/${this._transferType}.png" alt="Event type icon">
@@ -67,7 +67,6 @@ export class Card {
           <span class="visually-hidden">Open event</span>
         </button>
       </div>
-    </li>`
-    ).join(``)}`;
+    </li>`;
   }
 }
