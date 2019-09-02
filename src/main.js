@@ -19,6 +19,7 @@ const makeData = (createData, count = CARDS_COUNT) => {
 };
 
 const cardsData = makeData(getTravelPoint);
+console.log(getTravelPoint)
 
 const sumArrayItems = (array) => {
   return array.reduce((sum, current) => sum + current, 0);

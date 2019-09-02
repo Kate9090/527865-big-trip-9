@@ -1,6 +1,6 @@
 export const randomCount = (limit) => Math.floor(Math.random() * limit);
 export const randomBoolean = () => Boolean(Math.round(Math.random()));
-const startOptionSlice = randomCount(1);
+const startOptionSlice = randomCount(3);
 
 export const getTravelPoint = () => ({
   transferType: [
@@ -84,7 +84,7 @@ export const getTravelPoint = () => ({
       price: 9,
       isActive: randomBoolean(),
     },
-  ].slice(startOptionSlice, 2 * startOptionSlice + 1),
+  ].slice(startOptionSlice, startOptionSlice + randomCount(2) + 1),
   countTripPointsPerDay: 1 + randomCount(2),
   isFuture() {
     if (this.date > Date(Date.now())) {
