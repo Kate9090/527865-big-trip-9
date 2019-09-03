@@ -55,7 +55,6 @@ const cardDaysList = new CardDaysList();
 
 const renderCard = (cardMock, i) => {
   const card = new Card(cardMock);
-  const cardEditForm = new CardEditForm(cardMock);
 
   const cardDaysItem = new CardDaysItem(cardMock);
   const cardsList = new CardsList();
@@ -67,11 +66,11 @@ const renderCard = (cardMock, i) => {
 
   const cardsContainer = tripDaysItem.querySelector(`.trip-events__list`);
 
-  const event = (card) => {
+  const event = (card, cardsContainer) => {
+    const cardEditForm = new CardEditForm(cardMock);
     const onEscKeyDown = (evt) => {
       if (evt.key === `Escape` || evt.key === `Esc`) {
-        card = evt.target.closest(`.trip-events__item`);
-        cardsContainer.replaceChild(card, cardEditForm.getElement());
+        cardsContainer.replaceChild(card.getElement(), cardEditForm.getElement());
         document.removeEventListener(`keydown`, onEscKeyDown);
       }
     }
@@ -102,10 +101,10 @@ const renderCard = (cardMock, i) => {
     const cardMore = new Card(cardMock);
     render(cardsMoreContainer, cardMore.getElement(), Position.BEFOREEND);
     
-    event(cardMore);
+    event(cardMore, cardsMoreContainer);
   }
 
-  event(card);
+  event(card, cardsContainer);
 }
 
 render(infoContainer, info.getElement(), Position.AFTERBEGIN);
