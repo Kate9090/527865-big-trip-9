@@ -35,7 +35,7 @@ export const getTravelPoint = () => ({
     `Sightseeing`,
     `Restaurant`
   ],
-  city: [`Tokyo`,`Kyoto`,`Singapore`,`Seul`,`Hanoi`][randomCount(5)],
+  city: [`Tokyo`, `Kyoto`, `Singapore`, `Seul`, `Hanoi`][randomCount(5)],
   pictures: new Set([
     `http://picsum.photos/300/150?r=${Math.random()}`,
     `http://picsum.photos/300/150?r=${Math.random()}`,
@@ -60,7 +60,7 @@ export const getTravelPoint = () => ({
   descriptionStartCentanceNumber: randomCount(9),
   descriptionEndCentanceNumber: 1 + randomCount(2),
   date: new Date(Date.now() + 1 + randomCount(7) * 24 * 60 * 60 * 1000),
-  monthNamesShort: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+  monthNamesShort: [`Jan`, `Feb`, `Mar`, `Apr`, `May`, `Jun`, `Jul`, `Aug`, `Sep`, `Oct`, `Nov`, `Dec`],
   durationOfTripPoint: randomCount(24) * randomCount(60) * 60 * 1000,
   price: randomCount(1000),
   options: [
@@ -88,15 +88,15 @@ export const getTravelPoint = () => ({
   countTripPointsPerDay: 1 + randomCount(2),
   isFuture() {
     if (this.date > Date(Date.now())) {
-      return true
+      return true;
     }
-    return false
+    return false;
   },
   isPast() {
     if (this.date < Date(Date.now())) {
-      return true
+      return true;
     }
-    return false
+    return false;
   },
 });
 
@@ -105,7 +105,7 @@ export const getMenu = () => ({
     `Table`,
     `Stats`
   ],
-})
+});
 
 export const getFilter = () => ({
   titles: [
@@ -113,9 +113,9 @@ export const getFilter = () => ({
     `Future`,
     `Past`,
   ]
-})
+});
 
 export const getSchedule = () => ({
-  startPoint: [`Tokyo`,`Kyoto`,`Singapore`,`Seul`,`Hanoi`][randomCount(5)],
-  endPoint: [`Tokyo`,`Kyoto`,`Singapore`,`Seul`,`Hanoi`][randomCount(5)],
-})
+  startPoint: [`Tokyo`, `Kyoto`, `Singapore`, `Seul`, `Hanoi`][randomCount(5)],
+  endPoint: [`Tokyo`, `Kyoto`, `Singapore`, `Seul`, `Hanoi`][randomCount(5)],
+});

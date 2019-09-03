@@ -5,7 +5,7 @@ export class CardsHeader {
   constructor() {
     this._element = null;
   }
-  
+
   getElement() {
     if (!this._element) {
       this._element = createElement(this.getTemplate());

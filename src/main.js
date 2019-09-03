@@ -7,8 +7,8 @@ import {Card} from '../src/components/card';
 import {Filter} from '../src/components/filter';
 import {Menu} from '../src/components/menu';
 import {Info} from '../src/components/info';
-import {getTravelPoint, getMenu, getFilter, getSchedule, randomBoolean} from './data';
-import {render, Position, removeElement} from './utils';
+import {getTravelPoint, getMenu, getFilter, getSchedule} from './data';
+import {render, Position} from './utils';
 
 const CARDS_COUNT = 3;
 
@@ -32,7 +32,7 @@ const calculateTotalPrice = (cards = cardsData) => {
   optionsPrice = sumArrayItems(cards
     .map((it) => it.countTripPointsPerDay * sumArrayItems(it.options
         .map((option) => option.price)
-      )
+    )
     )
   );
 
@@ -61,51 +61,51 @@ const renderCard = (cardMock, i) => {
 
   render(tripEventsContainer, cardDaysItem.getElement(), Position.BEFOREEND);
 
-  const tripDaysItem = tripEventsContainer.querySelectorAll(`.trip-days__item`)[i]
+  const tripDaysItem = tripEventsContainer.querySelectorAll(`.trip-days__item`)[i];
   render(tripDaysItem, cardsList.getElement(), Position.BEFOREEND);
 
   const cardsContainer = tripDaysItem.querySelector(`.trip-events__list`);
 
-  const event = (card, cardsContainer) => {
+  const event = (someCard, someCardsContainer) => {
     const cardEditForm = new CardEditForm(cardMock);
     const onEscKeyDown = (evt) => {
       if (evt.key === `Escape` || evt.key === `Esc`) {
-        cardsContainer.replaceChild(card.getElement(), cardEditForm.getElement());
+        someCardsContainer.replaceChild(someCard.getElement(), cardEditForm.getElement());
         document.removeEventListener(`keydown`, onEscKeyDown);
       }
-    }
-  
-    card.getElement().querySelector(`.event__rollup-btn`)
+    };
+
+    someCard.getElement().querySelector(`.event__rollup-btn`)
       .addEventListener(`click`, () => {
-        cardsContainer.replaceChild(cardEditForm.getElement(), card.getElement());
+        someCardsContainer.replaceChild(cardEditForm.getElement(), someCard.getElement());
         document.addEventListener(`keydown`, onEscKeyDown);
       });
-  
+
     cardEditForm.getElement().querySelector(`.event__rollup-btn`)
       .addEventListener(`click`, () => {
-        cardsContainer.replaceChild(card.getElement(), cardEditForm.getElement());
+        someCardsContainer.replaceChild(someCard.getElement(), cardEditForm.getElement());
         document.removeEventListener(`keydown`, onEscKeyDown);
       });
 
     cardEditForm.getElement().querySelector(`.event__save-btn`)
       .addEventListener(`click`, () => {
-        cardsContainer.replaceChild(card.getElement(), cardEditForm.getElement());
+        someCardsContainer.replaceChild(someCard.getElement(), cardEditForm.getElement());
         document.removeEventListener(`keydown`, onEscKeyDown);
       });
-  }
-  
+  };
+
   render(cardsContainer, card.getElement(), Position.BEFOREEND);
 
   if (cardMock.countTripPointsPerDay > 1) {
     const cardsMoreContainer = tripDaysItem.querySelector(`.trip-events__list`);
     const cardMore = new Card(cardMock);
     render(cardsMoreContainer, cardMore.getElement(), Position.BEFOREEND);
-    
+
     event(cardMore, cardsMoreContainer);
   }
 
   event(card, cardsContainer);
-}
+};
 
 render(infoContainer, info.getElement(), Position.AFTERBEGIN);
 render(menuContainer, menu.getElement(), Position.BEFOREEND);

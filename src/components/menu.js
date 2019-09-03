@@ -19,7 +19,6 @@ export class Menu {
     this._element = null;
   }
 
-  
   getTemplate() {
     return `<nav class="trip-controls__trip-tabs  trip-tabs">
       ${this._titles.map((title) => `<a class="trip-tabs__btn" href="#">${title}</a>`).join(``)}

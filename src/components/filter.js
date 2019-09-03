@@ -18,7 +18,7 @@ export class Filter {
   removeElement() {
     this._element = null;
   }
-  
+
   getTemplate() {
     return `<form class="trip-filters" action="#" method="get">
       ${this._titles.map((title) => `<div class="trip-filters__filter">
