@@ -1,9 +1,14 @@
-import {makeCardEditTemplate} from '../src/components/card-edit';
-import {makeCardTemplate} from '../src/components/card';
-import {makeFilterTemplate} from '../src/components/filter';
-import {makeMenuTemplate} from '../src/components/menu';
-import {makeInfoTemplate} from '../src/components/info';
+import {CardsHeader} from '../src/components/cards-header';
+import {CardDaysItem} from '../src/components/card-days-item';
+import {CardDaysList} from '../src/components/card-days-list';
+import {CardsList} from '../src/components/cards-list';
+import {CardEditForm} from '../src/components/card-edit';
+import {Card} from '../src/components/card';
+import {Filter} from '../src/components/filter';
+import {Menu} from '../src/components/menu';
+import {Info} from '../src/components/info';
 import {getTravelPoint, getMenu, getFilter, getSchedule} from './data';
+import {render, Position} from './utils';
 
 const CARDS_COUNT = 3;
 
@@ -27,7 +32,7 @@ const calculateTotalPrice = (cards = cardsData) => {
   optionsPrice = sumArrayItems(cards
     .map((it) => it.countTripPointsPerDay * sumArrayItems(it.options
         .map((option) => option.price)
-      )
+    )
     )
   );
 
@@ -37,27 +42,76 @@ const calculateTotalPrice = (cards = cardsData) => {
 
 getTravelPoint.totalPrice = calculateTotalPrice();
 
-const renderComponent = (parent, child, place) => {
-  parent.insertAdjacentHTML(place, child);
-};
 const mainContainer = document.querySelector(`.page-body`);
 const infoContainer = mainContainer.querySelector(`.trip-main__trip-info`);
 const menuContainer = mainContainer.querySelector(`.trip-main__trip-controls`);
-const cardEditContainer = mainContainer.querySelector(`.page-body__container .trip-events`);
+const tripEventsContainer = mainContainer.querySelector(`.page-body__container .trip-events`);
 
-const renderMockComponents = () => {
-  renderComponent(infoContainer, makeInfoTemplate(getSchedule()), `afterbegin`);
-  renderComponent(menuContainer, makeMenuTemplate(getMenu()),`beforeend`);
-  renderComponent(menuContainer, makeFilterTemplate(getFilter()),`beforeend`);
-  renderComponent(cardEditContainer, makeCardEditTemplate(getTravelPoint()),`afterbegin`);
+const info = new Info(getSchedule());
+const menu = new Menu(getMenu());
+const filter = new Filter(getFilter());
+const cardsHeader = new CardsHeader();
+const cardDaysList = new CardDaysList();
 
-  const tripArray = new Array(CARDS_COUNT).fill(``).map((item, i)=>
-    makeCardTemplate(cardsData[i])
-  ).join(``)
+const renderCard = (cardMock, i) => {
+  const card = new Card(cardMock);
 
-  renderComponent(cardEditContainer, tripArray,`beforeend`);
+  const cardDaysItem = new CardDaysItem(cardMock);
+  const cardsList = new CardsList();
 
-  mainContainer.querySelector(`.trip-info__cost-value`).innerHTML = getTravelPoint.totalPrice;
+  render(tripEventsContainer, cardDaysItem.getElement(), Position.BEFOREEND);
+
+  const tripDaysItem = tripEventsContainer.querySelectorAll(`.trip-days__item`)[i];
+  render(tripDaysItem, cardsList.getElement(), Position.BEFOREEND);
+
+  const cardsContainer = tripDaysItem.querySelector(`.trip-events__list`);
+
+  const event = (someCard, someCardsContainer) => {
+    const cardEditForm = new CardEditForm(cardMock);
+    const onEscKeyDown = (evt) => {
+      if (evt.key === `Escape` || evt.key === `Esc`) {
+        someCardsContainer.replaceChild(someCard.getElement(), cardEditForm.getElement());
+        document.removeEventListener(`keydown`, onEscKeyDown);
+      }
+    };
+
+    someCard.getElement().querySelector(`.event__rollup-btn`)
+      .addEventListener(`click`, () => {
+        someCardsContainer.replaceChild(cardEditForm.getElement(), someCard.getElement());
+        document.addEventListener(`keydown`, onEscKeyDown);
+      });
+
+    cardEditForm.getElement().querySelector(`.event__rollup-btn`)
+      .addEventListener(`click`, () => {
+        someCardsContainer.replaceChild(someCard.getElement(), cardEditForm.getElement());
+        document.removeEventListener(`keydown`, onEscKeyDown);
+      });
+
+    cardEditForm.getElement().querySelector(`.event__save-btn`)
+      .addEventListener(`click`, () => {
+        someCardsContainer.replaceChild(someCard.getElement(), cardEditForm.getElement());
+        document.removeEventListener(`keydown`, onEscKeyDown);
+      });
+  };
+
+  render(cardsContainer, card.getElement(), Position.BEFOREEND);
+
+  if (cardMock.countTripPointsPerDay > 1) {
+    const cardsMoreContainer = tripDaysItem.querySelector(`.trip-events__list`);
+    const cardMore = new Card(cardMock);
+    render(cardsMoreContainer, cardMore.getElement(), Position.BEFOREEND);
+
+    event(cardMore, cardsMoreContainer);
+  }
+
+  event(card, cardsContainer);
 };
 
-renderMockComponents();
+render(infoContainer, info.getElement(), Position.AFTERBEGIN);
+render(menuContainer, menu.getElement(), Position.BEFOREEND);
+render(menuContainer, filter.getElement(), Position.BEFOREEND);
+render(tripEventsContainer, cardsHeader.getElement(), Position.AFTERBEGIN);
+render(tripEventsContainer, cardDaysList.getElement(), Position.BEFOREEND);
+
+cardsData.forEach((cardMock, i) => renderCard(cardMock, i));
+mainContainer.querySelector(`.trip-info__cost-value`).innerHTML = getTravelPoint.totalPrice;

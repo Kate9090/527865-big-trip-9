@@ -1,6 +1,6 @@
 export const randomCount = (limit) => Math.floor(Math.random() * limit);
 export const randomBoolean = () => Boolean(Math.round(Math.random()));
-const startOptionSlice = randomCount(1);
+const startOptionSlice = randomCount(3);
 
 export const getTravelPoint = () => ({
   transferType: [
@@ -35,7 +35,7 @@ export const getTravelPoint = () => ({
     `Sightseeing`,
     `Restaurant`
   ],
-  city: [`Tokyo`,`Kyoto`,`Singapore`,`Seul`,`Hanoi`][randomCount(5)],
+  city: [`Tokyo`, `Kyoto`, `Singapore`, `Seul`, `Hanoi`][randomCount(5)],
   pictures: new Set([
     `http://picsum.photos/300/150?r=${Math.random()}`,
     `http://picsum.photos/300/150?r=${Math.random()}`,
@@ -60,6 +60,7 @@ export const getTravelPoint = () => ({
   descriptionStartCentanceNumber: randomCount(9),
   descriptionEndCentanceNumber: 1 + randomCount(2),
   date: new Date(Date.now() + 1 + randomCount(7) * 24 * 60 * 60 * 1000),
+  monthNamesShort: [`Jan`, `Feb`, `Mar`, `Apr`, `May`, `Jun`, `Jul`, `Aug`, `Sep`, `Oct`, `Nov`, `Dec`],
   durationOfTripPoint: randomCount(24) * randomCount(60) * 60 * 1000,
   price: randomCount(1000),
   options: [
@@ -83,19 +84,19 @@ export const getTravelPoint = () => ({
       price: 9,
       isActive: randomBoolean(),
     },
-  ].slice(startOptionSlice, 2 * startOptionSlice + 1),
+  ].slice(startOptionSlice, startOptionSlice + randomCount(2) + 1),
   countTripPointsPerDay: 1 + randomCount(2),
   isFuture() {
     if (this.date > Date(Date.now())) {
-      return true
+      return true;
     }
-    return false
+    return false;
   },
   isPast() {
     if (this.date < Date(Date.now())) {
-      return true
+      return true;
     }
-    return false
+    return false;
   },
 });
 
@@ -104,7 +105,7 @@ export const getMenu = () => ({
     `Table`,
     `Stats`
   ],
-})
+});
 
 export const getFilter = () => ({
   titles: [
@@ -112,9 +113,9 @@ export const getFilter = () => ({
     `Future`,
     `Past`,
   ]
-})
+});
 
 export const getSchedule = () => ({
-  startPoint: [`Tokyo`,`Kyoto`,`Singapore`,`Seul`,`Hanoi`][randomCount(5)],
-  endPoint: [`Tokyo`,`Kyoto`,`Singapore`,`Seul`,`Hanoi`][randomCount(5)],
-})
+  startPoint: [`Tokyo`, `Kyoto`, `Singapore`, `Seul`, `Hanoi`][randomCount(5)],
+  endPoint: [`Tokyo`, `Kyoto`, `Singapore`, `Seul`, `Hanoi`][randomCount(5)],
+});
