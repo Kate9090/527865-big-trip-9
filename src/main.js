@@ -37,3 +37,4 @@ const calculateTotalPrice = (cards = cardsData) => {
 getTravelPoint.totalPrice = calculateTotalPrice();
 
 const tripController = new TripController(tripEventsContainer, cardsData);
+tripController._init(cardsData);
