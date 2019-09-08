@@ -1,6 +1,6 @@
-import {createElement} from '../utils';
+import {AbstractComponent} from './abstract-component';
 
-export class CardEditForm {
+export class CardEditForm extends AbstractComponent {
   constructor({
     activity,
     description,
@@ -10,6 +10,7 @@ export class CardEditForm {
     pictures,
     transfer,
   }) {
+    super();
     this._activity = activity;
     this._description = description;
     this._descriptionStartCentanceNumber = descriptionStartCentanceNumber;
@@ -17,18 +18,6 @@ export class CardEditForm {
     this._options = options;
     this._pictures = pictures;
     this._transfer = transfer;
-    this._element = null;
-  }
-
-  getElement() {
-    if (!this._element) {
-      this._element = createElement(this.getTemplate());
-    }
-    return this._element;
-  }
-
-  removeElement() {
-    this._element = null;
   }
 
   getTemplate() {

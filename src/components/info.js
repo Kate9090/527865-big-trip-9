@@ -1,24 +1,13 @@
-import {createElement} from '../utils';
+import {AbstractComponent} from './abstract-component';
 
-export class Info {
+export class Info extends AbstractComponent {
   constructor({
     endPoint,
     startPoint,
   }) {
+    super();
     this._endPoint = endPoint;
     this._startPoint = startPoint;
-    this._element = null;
-  }
-
-  getElement() {
-    if (!this._element) {
-      this._element = createElement(this.getTemplate());
-    }
-    return this._element;
-  }
-
-  removeElement() {
-    this._element = null;
   }
 
   getTemplate() {

@@ -1,6 +1,6 @@
-import {createElement} from '../utils';
+import {AbstractComponent} from './abstract-component';
 
-export class Card {
+export class Card extends AbstractComponent {
   constructor({
     city,
     countTripPointsPerDay,
@@ -11,6 +11,7 @@ export class Card {
     price,
     transferType,
   }) {
+    super();
     this._city = city;
     this._countTripPointsPerDay = countTripPointsPerDay;
     this._date = date;
@@ -19,18 +20,6 @@ export class Card {
     this._options = options;
     this._price = price;
     this._transferType = transferType;
-    this._element = null;
-  }
-
-  getElement() {
-    if (!this._element) {
-      this._element = createElement(this.getTemplate());
-    }
-    return this._element;
-  }
-
-  removeElement() {
-    this._element = null;
   }
 
   getTemplate() {
