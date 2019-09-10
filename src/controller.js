@@ -26,6 +26,34 @@ export default class TripController {
     this._tripEventsContainer = this._mainContainer.querySelector(`.page-body__container .trip-events`);
   }
 
+  _renderEvent(someCard, someCardsContainer) {
+    const cardEditForm = new CardEditForm(cardMock);
+    const onEscKeyDown = (evt) => {
+      if (evt.key === `Escape` || evt.key === `Esc`) {
+        someCardsContainer.replaceChild(someCard.getElement(), cardEditForm.getElement());
+        document.removeEventListener(`keydown`, onEscKeyDown);
+      }
+    };
+
+    someCard.getElement().querySelector(`.event__rollup-btn`)
+      .addEventListener(`click`, () => {
+        someCardsContainer.replaceChild(cardEditForm.getElement(), someCard.getElement());
+        document.addEventListener(`keydown`, onEscKeyDown);
+      });
+
+    cardEditForm.getElement().querySelector(`.event__rollup-btn`)
+      .addEventListener(`click`, () => {
+        someCardsContainer.replaceChild(someCard.getElement(), cardEditForm.getElement());
+        document.removeEventListener(`keydown`, onEscKeyDown);
+      });
+
+    cardEditForm.getElement().querySelector(`.event__save-btn`)
+      .addEventListener(`click`, () => {
+        someCardsContainer.replaceChild(someCard.getElement(), cardEditForm.getElement());
+        document.removeEventListener(`keydown`, onEscKeyDown);
+      });
+  };
+
   _renderCard(cardMock, i) {
     const card = new Card(cardMock);
     const cardDaysItem = new CardDaysItem(cardMock);
@@ -38,34 +66,6 @@ export default class TripController {
 
     const cardsContainer = tripDaysItem.querySelector(`.trip-events__list`);
 
-    const event = (someCard, someCardsContainer) => {
-      const cardEditForm = new CardEditForm(cardMock);
-      const onEscKeyDown = (evt) => {
-        if (evt.key === `Escape` || evt.key === `Esc`) {
-          someCardsContainer.replaceChild(someCard.getElement(), cardEditForm.getElement());
-          document.removeEventListener(`keydown`, onEscKeyDown);
-        }
-      };
-
-      someCard.getElement().querySelector(`.event__rollup-btn`)
-        .addEventListener(`click`, () => {
-          someCardsContainer.replaceChild(cardEditForm.getElement(), someCard.getElement());
-          document.addEventListener(`keydown`, onEscKeyDown);
-        });
-
-      cardEditForm.getElement().querySelector(`.event__rollup-btn`)
-        .addEventListener(`click`, () => {
-          someCardsContainer.replaceChild(someCard.getElement(), cardEditForm.getElement());
-          document.removeEventListener(`keydown`, onEscKeyDown);
-        });
-
-      cardEditForm.getElement().querySelector(`.event__save-btn`)
-        .addEventListener(`click`, () => {
-          someCardsContainer.replaceChild(someCard.getElement(), cardEditForm.getElement());
-          document.removeEventListener(`keydown`, onEscKeyDown);
-        });
-    };
-
     render(cardsContainer, card.getElement(), Position.BEFOREEND);
 
     if (cardMock.countTripPointsPerDay > 1) {
@@ -73,13 +73,13 @@ export default class TripController {
       const cardMore = new Card(cardMock);
       render(cardsMoreContainer, cardMore.getElement(), Position.BEFOREEND);
 
-      event(cardMore, cardsMoreContainer);
+      this._renderEvent(cardMore, cardsMoreContainer);
     }
 
-    event(card, cardsContainer);
+    this._renderEvent(card, cardsContainer);
   }
 
-  _init(cardsData) {
+  init(cardsData) {
     render(this._infoContainer, this._info.getElement(), Position.AFTERBEGIN);
     render(this._menuContainer, this._menu.getElement(), Position.BEFOREEND);
     render(this._menuContainer, this._filter.getElement(), Position.BEFOREEND);
